@@ -222,7 +222,7 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 .btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:4px 4px 0 var(--line)}
 .form-grid{display:grid;gap:12px}
 .field label{display:block;font-size:13.5px;font-weight:800;margin-bottom:5px}
-.field input[type="text"],.field textarea,.field select{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface2);border:2px solid var(--line-soft);padding:11px 12px;border-radius:0}
+.field input[type="text"],.field input[type="password"],.field textarea,.field select{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface2);border:2px solid var(--line-soft);padding:11px 12px;border-radius:0}
 .field input:focus,.field textarea:focus,.field select:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--line)}
 .field textarea{resize:vertical;min-height:64px}
 .form-h{font-size:15px;font-weight:900;margin:20px 0 10px}
@@ -266,10 +266,21 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 .share-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:15px;word-break:break-all;display:block;margin:6px 0 10px}
 .share-actions{display:flex;gap:10px;flex-wrap:wrap}
 .share-actions .btn{flex:1;min-width:140px;width:auto;padding:11px 16px;font-size:15px}
-.custom-item{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1.5px solid var(--line-soft);background:var(--surface2);padding:13px 14px;margin-bottom:10px}
+.custom-item{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border:1.5px solid var(--line-soft);background:var(--surface2);padding:13px 14px;margin-bottom:10px}
 .custom-item .ci-t{font-weight:900;font-size:15.5px}
 .custom-item .ci-d{font-size:13px;color:var(--muted);line-height:1.55;margin-top:2px}
-.custom-item .ci-btns{display:flex;gap:8px;flex:0 0 auto}
+.custom-item .ci-btns{display:flex;gap:8px;flex:0 0 auto;flex-wrap:wrap}
+.ci-del-box{flex-basis:100%}
+.del-link{color:#e07856;font-weight:800}
+.del-box{margin-top:10px;border:2px solid #e07856;background:var(--surface);padding:14px}
+.del-box label{display:block;font-size:13.5px;font-weight:800;margin-bottom:6px}
+.del-pw{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface2);border:2px solid var(--line-soft);padding:11px 12px;border-radius:0}
+.del-pw:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--line)}
+.del-note{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
+.del-msg{font-size:13.5px;font-weight:700;color:#c2482a;min-height:20px;margin:8px 0 0;line-height:1.55}
+@media (prefers-color-scheme: dark){.del-msg{color:#ff9d85}}
+.del-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.del-confirm-q{font-size:15px;font-weight:900;margin:0;line-height:1.6}
 .nick-row{display:flex;gap:10px;flex-wrap:wrap}
 .nick-row input{flex:1;min-width:180px;font:inherit;font-size:15px;color:var(--ink);background:var(--surface2);border:2px solid var(--line-soft);padding:11px 12px;border-radius:0}
 .nick-row input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--line)}
@@ -420,6 +431,7 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     <h2>訪客開嘅測驗</h2>
     <p class="hint">呢度係訪客自己開嘅測驗，唔使登入都玩得。每份都有專屬路徑（#/play/…），複製成條連結俾朋友就一齊玩到。</p>
     <div id="custom-list"></div>
+    <p class="copied-msg" id="custom-msg" role="status"></p>
   </div>
 
   <div class="section" id="create-section">
@@ -428,6 +440,7 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     <div class="form-grid">
       <div class="field"><label for="cq-title">測驗標題</label><input type="text" id="cq-title" maxlength="60" placeholder="例如：你係邊種茶餐廳常客？"></div>
       <div class="field"><label for="cq-desc">簡介（可留空）</label><textarea id="cq-desc" maxlength="200" placeholder="一句講下呢份測驗玩咩"></textarea></div>
+      <div class="field"><label for="cq-password">刪除密碼（必填）</label><input type="password" id="cq-password" maxlength="64" autocomplete="new-password" placeholder="最少 4 個字元"><p class="hint" style="margin:6px 0 0">記住呢個密碼，之後刪呢份測驗要用；唔見咗就刪唔到，連平台都幫唔到你拎返。</p></div>
     </div>
     <p class="form-h">結果（最少 2 個，最多 8 個）</p>
     <div id="cq-results"></div>
@@ -455,6 +468,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 <!-- ===== QUIZ (shared shell) ===== -->
 <section id="screen-quiz" class="hidden" aria-live="polite">
   <button class="back-link" id="btn-quit" type="button">← 返去揀其他測驗</button>
+  <div id="quiz-del-wrap" class="hidden">
+    <button class="link-btn del-link" id="btn-del-quiz" type="button">刪除呢份測驗</button>
+    <div id="quiz-del-box"></div>
+  </div>
   <div class="progress-head">
     <span class="step" id="step-label">第 1 題</span>
     <span class="dim" id="dim-label"></span>
@@ -1475,6 +1492,12 @@ function startQuiz(which){
   mode = which;
   current = 0;
   answers = [];
+  var delWrap = document.getElementById("quiz-del-wrap");
+  if (delWrap){
+    /* 刪除掣只出現喺訪客自訂測驗嘅遊玩頁；7 份內置測驗永遠唔會有 */
+    delWrap.classList.toggle("hidden", !(which === "custom" && customQuiz));
+    document.getElementById("quiz-del-box").innerHTML = "";
+  }
   renderQuestion();
   show("quiz");
 }
@@ -1957,13 +1980,14 @@ try {
 function createRestClient(baseUrl, apiKey){
   var root = String(baseUrl).replace(/\/+$/, "");
   function fromTable(table){
-    var selectCols = "*", filters = [], orderSpec = null, isSingle = false, insertRow = null, memo = null;
+    var selectCols = "*", filters = [], orderSpec = null, isSingle = false, insertRow = null, isDelete = false, memo = null;
     var builder = {
       select: function(cols){ selectCols = cols || "*"; return builder; },
       eq: function(col, val){ filters.push(col + "=eq." + encodeURIComponent(val)); return builder; },
       order: function(col, opts){ orderSpec = col + "." + (opts && opts.ascending === false ? "desc" : "asc"); return builder; },
       single: function(){ isSingle = true; return builder; },
       insert: function(row){ insertRow = row; return builder; },
+      del: function(){ isDelete = true; return builder; },
       then: function(onF, onR){ return execOnce().then(onF, onR); },
       catch: function(onR){ return execOnce().catch(onR); }
     };
@@ -1984,6 +2008,18 @@ function createRestClient(baseUrl, apiKey){
       return { data: null, error: { network: true, message: "連唔到伺服器（" + (err && err.message ? err.message : "網絡錯誤") + "）" } };
     }
     function execute(){
+      if (isDelete){
+        /* 用 return=representation：RLS 未開放刪除嗰陣 PostgREST 會靜靜雞刪 0 行兼回 204，
+           要靠回傳嘅行數先知係咪真係刪到。 */
+        return fetch(root + "/rest/v1/" + table + (filters.length ? "?" + filters.join("&") : ""), {
+          method: "DELETE",
+          headers: { apikey: apiKey, Authorization: "Bearer " + apiKey, Prefer: "return=representation" }
+        }).then(function(r){
+          if (!r.ok) return errFromResponse(r);
+          return r.json().then(function(d){ return { data: d, error: null }; })
+            .catch(function(){ return { data: [], error: null }; });
+        }).catch(errFromThrow);
+      }
       if (insertRow){
         return fetch(root + "/rest/v1/" + table, {
           method: "POST",
@@ -2217,7 +2253,8 @@ function normalizeCustom(raw){
     title: raw.title || "未命名測驗",
     description: raw.description || "",
     questions: raw.questions || [],
-    results: raw.results || []
+    results: raw.results || [],
+    creatorCode: raw.creator_code || ""
   };
 }
 
@@ -2258,8 +2295,19 @@ function renderCustomList(){
       copy.textContent = "複製咗 ✓";
       setTimeout(function(){ copy.textContent = old; }, 1600);
     });
-    btns.appendChild(play); btns.appendChild(copy);
-    item.appendChild(info); item.appendChild(btns);
+    var delBtn = document.createElement("button"); delBtn.type = "button"; delBtn.className = "mini-btn cq-del"; delBtn.textContent = "刪除呢份測驗";
+    var delBox = document.createElement("div"); delBox.className = "ci-del-box hidden";
+    delBtn.addEventListener("click", function(){
+      if (delBox.classList.contains("hidden")){
+        delBox.classList.remove("hidden");
+        buildDeletePanel(q, delBox);
+      } else {
+        delBox.classList.add("hidden");
+        delBox.innerHTML = "";
+      }
+    });
+    btns.appendChild(play); btns.appendChild(copy); btns.appendChild(delBtn);
+    item.appendChild(info); item.appendChild(btns); item.appendChild(delBox);
     list.appendChild(item);
   });
 }
@@ -2270,7 +2318,8 @@ function saveCustomQuiz(quiz){
   if (sb){
     return sb.from("quizzes").insert({
       id: quiz.id, title: quiz.title, description: quiz.description,
-      questions: quiz.questions, results: quiz.results
+      questions: quiz.questions, results: quiz.results,
+      creator_code: quiz.creatorCode || null
     }).then(function(res){ return !res.error; }).catch(function(){ return false; });
   }
   return Promise.resolve(false);
@@ -2306,6 +2355,163 @@ function fetchCustomQuizzes(){
       renderCustomList();
     })
     .catch(function(){});
+}
+
+/* ---------- 刪除密碼 + 訪客自刪測驗 ---------- */
+/* 密碼永遠唔會以明文儲存或者傳送：開測驗嗰陣即刻用 SHA-256 雜湊，
+   只將雜湊值存入 quizzes.creator_code；刪除嗰陣將輸入嘅密碼同樣雜湊再比對。 */
+function sha256Fallback(str){
+  function rr(v, a){ return (v >>> a) | (v << (32 - a)); }
+  var K = [
+    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+  ];
+  var H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  var bytes = unescape(encodeURIComponent(str));
+  var bitLen = bytes.length * 8;
+  bytes += "\x80";
+  while (bytes.length % 64 !== 56) bytes += "\x00";
+  var hi = Math.floor(bitLen / 4294967296), lo = bitLen >>> 0, i, j;
+  for (i = 3; i >= 0; i--) bytes += String.fromCharCode((hi >>> (i * 8)) & 0xff);
+  for (i = 3; i >= 0; i--) bytes += String.fromCharCode((lo >>> (i * 8)) & 0xff);
+  var w = new Array(64);
+  for (var block = 0; block < bytes.length; block += 64){
+    for (i = 0; i < 16; i++){
+      var o = block + i * 4;
+      w[i] = (bytes.charCodeAt(o) << 24) | (bytes.charCodeAt(o + 1) << 16) | (bytes.charCodeAt(o + 2) << 8) | bytes.charCodeAt(o + 3);
+    }
+    for (i = 16; i < 64; i++){
+      var s0 = rr(w[i - 15], 7) ^ rr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+      var s1 = rr(w[i - 2], 17) ^ rr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0;
+    }
+    var a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+    for (j = 0; j < 64; j++){
+      var S1 = rr(e, 6) ^ rr(e, 11) ^ rr(e, 25);
+      var ch = (e & f) ^ (~e & g);
+      var t1 = (h + S1 + ch + K[j] + w[j]) | 0;
+      var S0 = rr(a, 2) ^ rr(a, 13) ^ rr(a, 22);
+      var mj = (a & b) ^ (a & c) ^ (b & c);
+      var t2 = (S0 + mj) | 0;
+      h = g; g = f; f = e; e = (d + t1) | 0;
+      d = c; c = b; b = a; a = (t1 + t2) | 0;
+    }
+    H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0;
+    H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+  }
+  return H.map(function(x){ return ("00000000" + (x >>> 0).toString(16)).slice(-8); }).join("");
+}
+
+function hashPassword(pw){
+  if (window.crypto && crypto.subtle && crypto.subtle.digest){
+    var buf = new TextEncoder().encode(pw);
+    return crypto.subtle.digest("SHA-256", buf).then(function(digest){
+      return Array.prototype.map.call(new Uint8Array(digest), function(b){
+        return ("0" + b.toString(16)).slice(-2);
+      }).join("");
+    }).catch(function(){ return sha256Fallback(pw); });
+  }
+  return Promise.resolve(sha256Fallback(pw));
+}
+
+function finishLocalDelete(quiz, subsOk){
+  delete customQuizzes[quiz.id];
+  localSubmissions = localSubmissions.filter(function(s){ return s.quiz_id !== quiz.id; });
+  if (lastCreatedId === quiz.id) lastCreatedId = null;
+  if (customQuiz && customQuiz.id === quiz.id) customQuiz = null;
+  renderCustomList();
+  var m = document.getElementById("custom-msg");
+  if (m) m.textContent = subsOk === false
+    ? "刪咗喇：「" + quiz.title + "」已經刪除，不過佢嘅提交紀錄刪唔到（可能伺服器未開放刪除權限），要由平台主人喺 Supabase 手動清走。"
+    : "刪咗喇：「" + quiz.title + "」同佢嘅提交紀錄已經刪除。";
+  if (!elQuiz.classList.contains("hidden") || !elCat.classList.contains("hidden")) show("home");
+}
+
+function performDelete(quiz, msgEl){
+  function fail(err){
+    if (msgEl) msgEl.textContent = "刪唔到住：" + (err && err.message ? err.message : "請遲啲再試。") +
+      (sb && !sbNetworkBlocked ? "（如果係權限問題，可能伺服器未開放刪除，刪唔到嘅話要由平台主人喺 Supabase 手動刪。）" : "");
+  }
+  if (sb && !sbNetworkBlocked){
+    sb.from("quizzes").del().eq("id", quiz.id)
+      .then(function(res){
+        if (res.error){ fail(res.error); return; }
+        if (!res.data || !res.data.length){
+          fail({ message: "伺服器冇刪到呢份測驗，可能未開放刪除權限" });
+          return;
+        }
+        sb.from("submissions").del().eq("quiz_id", quiz.id)
+          .then(function(sres){ finishLocalDelete(quiz, !(sres && sres.error)); })
+          .catch(function(){ finishLocalDelete(quiz, false); });
+      })
+      .catch(fail);
+  } else {
+    finishLocalDelete(quiz);
+  }
+}
+
+/* 喺指定容器入面起一個刪除流程：入密碼 → 核對雜湊 → 再確認 → 先真刪 */
+function buildDeletePanel(quiz, box){
+  box.innerHTML = "";
+  var panel = document.createElement("div"); panel.className = "del-box";
+  if (!quiz.creatorCode){
+    var note = document.createElement("p"); note.className = "del-note";
+    note.textContent = "呢份測驗係喺「刪除密碼」功能推出之前開嘅，冇設定過刪除密碼，所以唔可以喺度自己刪。要刪嘅話，要由平台主人去 Supabase Table Editor 手動刪除。";
+    panel.appendChild(note);
+    box.appendChild(panel);
+    return;
+  }
+  var label = document.createElement("label");
+  label.textContent = "入返開呢份測驗嗰陣設定嘅刪除密碼：";
+  var input = document.createElement("input");
+  input.type = "password"; input.className = "del-pw"; input.maxLength = 64;
+  input.setAttribute("autocomplete", "off");
+  input.setAttribute("aria-label", "刪除密碼");
+  var msg = document.createElement("p"); msg.className = "del-msg"; msg.setAttribute("role", "status");
+  var btns = document.createElement("div"); btns.className = "del-btns";
+  var okBtn = document.createElement("button"); okBtn.type = "button"; okBtn.className = "mini-btn cq-del"; okBtn.textContent = "下一步";
+  var cancelBtn = document.createElement("button"); cancelBtn.type = "button"; cancelBtn.className = "mini-btn"; cancelBtn.textContent = "取消";
+  cancelBtn.addEventListener("click", function(){ box.innerHTML = ""; });
+  btns.appendChild(okBtn); btns.appendChild(cancelBtn);
+  panel.appendChild(label); panel.appendChild(input); panel.appendChild(msg); panel.appendChild(btns);
+  box.appendChild(panel);
+  input.focus();
+  okBtn.addEventListener("click", function(){
+    var pw = input.value;
+    if (!pw){ msg.textContent = "入返刪除密碼先。"; return; }
+    okBtn.disabled = true;
+    hashPassword(pw).then(function(hash){
+      okBtn.disabled = false;
+      if (hash !== quiz.creatorCode){
+        msg.textContent = "密碼唔啱，請再試過。";
+        input.value = "";
+        input.focus();
+        return;
+      }
+      /* 密碼啱：再確認一次先刪 */
+      panel.innerHTML = "";
+      var q = document.createElement("p"); q.className = "del-confirm-q";
+      q.textContent = "真係要刪？刪咗就拎唔返，呢份測驗同佢嘅提交紀錄會一齊冇晒。";
+      var msg2 = document.createElement("p"); msg2.className = "del-msg"; msg2.setAttribute("role", "status");
+      var btns2 = document.createElement("div"); btns2.className = "del-btns";
+      var yesBtn = document.createElement("button"); yesBtn.type = "button"; yesBtn.className = "mini-btn cq-del"; yesBtn.textContent = "係，刪咗佢";
+      var noBtn = document.createElement("button"); noBtn.type = "button"; noBtn.className = "mini-btn"; noBtn.textContent = "唔好住";
+      noBtn.addEventListener("click", function(){ box.innerHTML = ""; });
+      yesBtn.addEventListener("click", function(){
+        yesBtn.disabled = true; noBtn.disabled = true;
+        msg2.textContent = "刪除緊…";
+        performDelete(quiz, msg2);
+      });
+      btns2.appendChild(yesBtn); btns2.appendChild(noBtn);
+      panel.appendChild(q); panel.appendChild(msg2); panel.appendChild(btns2);
+    });
+  });
 }
 
 /* ---------- 開測驗表單 ---------- */
@@ -2507,6 +2713,8 @@ if (cqResultsEl && cqQuestionsEl){
     var title = document.getElementById("cq-title").value.trim();
     var desc = document.getElementById("cq-desc").value.trim();
     if (!title){ msg.textContent = "要填測驗標題先開到。"; return; }
+    var delPw = document.getElementById("cq-password").value;
+    if (!delPw || delPw.length < 4){ msg.textContent = "刪除密碼最少要有 4 個字元，設定好之後先刪得返呢份測驗。"; return; }
     var ok = true;
     var hasUnassigned = false;
     var results = [];
@@ -2542,7 +2750,13 @@ if (cqResultsEl && cqQuestionsEl){
     var id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
     var quiz = { id: id, title: title, description: desc, questions: questions, results: results };
     lastCreatedId = id;
-    saveCustomQuiz(quiz).then(function(synced){
+    msg.textContent = "建立緊…";
+    /* 密碼即刻雜湊，明文唔會儲存、唔會傳送；存落去嘅只有 creator_code 雜湊值 */
+    hashPassword(delPw).then(function(hash){
+      quiz.creatorCode = hash;
+      document.getElementById("cq-password").value = "";
+      return saveCustomQuiz(quiz);
+    }).then(function(synced){
       msg.textContent = synced
         ? "開好喇，已經同步到 Supabase，朋友用條路徑就玩得。"
         : (sb ? "開好喇（頭先同步唔到，暫時只留喺今次開頁）。"
@@ -2580,6 +2794,12 @@ startBtns.forEach(function(btn){
   btn.addEventListener("click", function(){ startQuiz(btn.getAttribute("data-start")); });
 });
 document.getElementById("btn-quit").addEventListener("click", function(){ show("home"); });
+document.getElementById("btn-del-quiz").addEventListener("click", function(){
+  if (mode !== "custom" || !customQuiz) return;
+  var box = document.getElementById("quiz-del-box");
+  if (box.innerHTML) box.innerHTML = "";
+  else buildDeletePanel(customQuiz, box);
+});
 document.getElementById("btn-home-1").addEventListener("click", function(){ show("home"); });
 document.getElementById("btn-home-2").addEventListener("click", function(){ show("home"); });
 document.getElementById("btn-home-3").addEventListener("click", function(){ show("home"); });
