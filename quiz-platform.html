@@ -231,9 +231,37 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 .sub-block .row-head b{font-size:14.5px}
 .mini-btn{background:none;border:1.5px solid var(--line);color:var(--ink);font-family:inherit;font-size:13px;font-weight:800;padding:6px 12px;cursor:pointer}
 .mini-btn:hover{background:var(--yellow-soft)}
-.opt-row{display:grid;grid-template-columns:1fr 150px;gap:8px;margin-top:8px}
-.opt-row input[type="text"],.opt-row select{font:inherit;font-size:14.5px;color:var(--ink);background:var(--surface);border:2px solid var(--line-soft);padding:10px 11px;width:100%;border-radius:0}
-@media (max-width:520px){.opt-row{grid-template-columns:1fr}}
+.mini-btn:disabled{opacity:.45;cursor:default}
+.mini-btn:disabled:hover{background:none}
+.mini-btn.cq-del{border-color:#e07856;color:#e07856}
+.mini-btn.cq-del:hover{background:#e07856;color:#fff}
+.mini-btn.cq-del:disabled{border-color:var(--line-soft);color:var(--muted)}
+.mini-btn.cq-del:disabled:hover{background:none;color:var(--muted)}
+.opt-row{background:var(--surface2);border:2px solid var(--line);box-shadow:4px 4px 0 var(--shadow);padding:12px;margin-top:10px}
+.opt-row input[type="text"]{font:inherit;font-size:14.5px;color:var(--ink);background:var(--surface);border:2px solid var(--line-soft);padding:10px 11px;width:100%;border-radius:0}
+.opt-row input[type="text"]:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--line)}
+.opt-row.unassigned{border-color:#e07856;box-shadow:4px 4px 0 #e07856}
+.cq-chip-label{font-size:12.5px;font-weight:800;color:var(--muted);margin:10px 0 0;letter-spacing:.02em}
+.cq-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px}
+.cq-chip{appearance:none;border:2px solid var(--line);background:#fff;color:#191b18;font-family:inherit;font-size:13.5px;font-weight:800;line-height:1.3;padding:7px 13px;border-radius:999px;cursor:pointer;box-shadow:2px 2px 0 var(--shadow);max-width:100%;overflow-wrap:anywhere;text-align:left}
+@media (prefers-color-scheme: dark){.cq-chip{background:var(--surface);color:var(--ink)}}
+.cq-chip:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--shadow)}
+.cq-chip:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow)}
+.cq-chip:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.cq-chip.selected{background:#2f6f6a;color:#fff;border-color:var(--line)}
+.cq-warn{margin-top:9px;border:2px solid #e07856;background:#ffe9e1;color:#7a2d18;font-size:13.5px;font-weight:700;line-height:1.6;padding:9px 11px}
+@media (prefers-color-scheme: dark){.cq-warn{background:#4a2418;color:#ffd9cb}}
+.cq-preview{margin-top:16px;border:2px solid var(--line);background:var(--surface2);box-shadow:4px 4px 0 var(--shadow);padding:14px 16px}
+.cq-preview h3{font-size:14.5px;font-weight:900;margin:0 0 8px}
+.cq-preview ul{margin:0;padding:0;list-style:none}
+.cq-preview li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line-soft);font-size:14px}
+.cq-preview li:first-child{border-top:0}
+.cq-preview li .pv-name{font-weight:800;overflow-wrap:anywhere}
+.cq-preview li .pv-count{font-weight:900;white-space:nowrap;color:#2f6f6a}
+.cq-preview li.zero .pv-count{color:#e07856}
+.cq-preview .pv-warn{margin-top:10px;border:2px solid #e07856;background:#ffe9e1;color:#7a2d18;font-size:13.5px;font-weight:700;line-height:1.6;padding:9px 11px}
+@media (prefers-color-scheme: dark){.cq-preview .pv-warn{background:#4a2418;color:#ffd9cb}}
+.cq-preview .pv-ok{margin-top:10px;font-size:13.5px;font-weight:700;color:#2f6f6a;line-height:1.6}
 .share-box{border:2px dashed var(--line);background:var(--teal-soft);padding:14px 16px;margin-top:14px}
 .share-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:15px;word-break:break-all;display:block;margin:6px 0 10px}
 .share-actions{display:flex;gap:10px;flex-wrap:wrap}
@@ -242,7 +270,6 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 .custom-item .ci-t{font-weight:900;font-size:15.5px}
 .custom-item .ci-d{font-size:13px;color:var(--muted);line-height:1.55;margin-top:2px}
 .custom-item .ci-btns{display:flex;gap:8px;flex:0 0 auto}
-.sql-box{background:var(--surface2);border:2px solid var(--line);padding:14px;font-size:12.5px;line-height:1.6;overflow-x:auto;white-space:pre;font-family:ui-monospace,Menlo,Consolas,monospace}
 .nick-row{display:flex;gap:10px;flex-wrap:wrap}
 .nick-row input{flex:1;min-width:180px;font:inherit;font-size:15px;color:var(--ink);background:var(--surface2);border:2px solid var(--line-soft);padding:11px 12px;border-radius:0}
 .nick-row input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--line)}
@@ -408,6 +435,7 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     <p class="form-h">問題（每題 4 個選項）</p>
     <div id="cq-questions"></div>
     <button class="mini-btn" id="cq-add-question" type="button">＋ 加多條問題</button>
+    <div class="cq-preview" id="cq-preview" aria-live="polite"></div>
     <div style="height:16px"></div>
     <button class="btn teal" id="cq-create" type="button">建立測驗</button>
     <p class="copied-msg" id="cq-msg" role="status"></p>
@@ -422,41 +450,6 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     </div>
   </div>
 
-  <div class="section" id="setup-section">
-    <h2>Supabase 設定（接通共享功能）</h2>
-    <p class="hint">想開通「訪客測驗長期保存」同「全體共享排名」，先去 Supabase 專案（已經喺新加坡開好）左邊嘅 SQL Editor，開 New query，貼上下面成段 SQL 按 Run 建好兩張表；再去 Settings &gt; API 抄低 Project URL 同 anon public key，填入呢個檔案頂部嘅 SUPABASE_URL 同 SUPABASE_ANON_KEY。未接通之前，平台會照用本機模式運作，頂部會有橫額提示。</p>
-    <div class="sql-box" id="sql-box">create table if not exists quizzes (
-  id text primary key,
-  title text not null,
-  description text,
-  questions jsonb not null,
-  results jsonb,
-  creator_code text,
-  created_at timestamptz default now()
-);
-
-create table if not exists submissions (
-  id uuid primary key default gen_random_uuid(),
-  quiz_id text not null,
-  nickname text,
-  result_type text not null,
-  created_at timestamptz default now()
-);
-
-alter table quizzes enable row level security;
-alter table submissions enable row level security;
-
-create policy "Public read quizzes" on quizzes for select using (true);
-create policy "Public insert quizzes" on quizzes for insert with check (true);
-create policy "Public read submissions" on submissions for select using (true);
-create policy "Public insert submissions" on submissions for insert with check (true);
-
-grant select, insert on quizzes to anon, authenticated;
-grant select, insert on submissions to anon, authenticated;</div>
-    <div style="height:12px"></div>
-    <button class="btn ghost" id="btn-copy-sql" type="button">複製 SQL</button>
-    <p class="copied-msg" id="sql-msg" role="status"></p>
-  </div>
 </section>
 
 <!-- ===== QUIZ (shared shell) ===== -->
@@ -2319,33 +2312,134 @@ function fetchCustomQuizzes(){
 var cqResultsEl = document.getElementById("cq-results");
 var cqQuestionsEl = document.getElementById("cq-questions");
 
+var cqResultSeq = 0;
+function nextCqResultId(){
+  cqResultSeq += 1;
+  return "res_" + Date.now().toString(36) + "_" + cqResultSeq;
+}
+function cqResultBlocks(){
+  return Array.prototype.slice.call(cqResultsEl.querySelectorAll(".cq-result"));
+}
+function cqResultsMeta(){
+  return cqResultBlocks().map(function(block, i){
+    var inp = block.querySelector(".cq-rname");
+    return { id: block.getAttribute("data-result-id") || "", index: i, name: inp ? inp.value.trim() : "" };
+  });
+}
+function cqResultLabel(meta){
+  return meta.name ? meta.name : ("結果 " + (meta.index + 1) + "（未改名）");
+}
+
 function renumberCustomForm(){
   cqResultsEl.querySelectorAll(".cq-result .row-head b").forEach(function(b, i){ b.textContent = "結果 " + (i + 1); });
   cqQuestionsEl.querySelectorAll(".cq-question .row-head b").forEach(function(b, i){ b.textContent = "問題 " + (i + 1); });
 }
 
-function refreshResultSelects(){
-  var names = [];
-  cqResultsEl.querySelectorAll(".cq-rname").forEach(function(inp){ names.push(inp.value.trim()); });
-  cqQuestionsEl.querySelectorAll("select.cq-osel").forEach(function(sel){
-    var prev = sel.value;
-    sel.innerHTML = "";
-    names.forEach(function(n, i){
-      var o = document.createElement("option");
-      o.value = String(i);
-      o.textContent = "結果 " + (i + 1) + (n ? "：" + n : "");
-      sel.appendChild(o);
-    });
-    if (prev !== "" && Number(prev) < names.length) sel.value = prev;
+function refreshCreator(){
+  var metas = cqResultsMeta();
+  var byId = {};
+  metas.forEach(function(m){ byId[m.id] = m; });
+  /* 每個選項：用內部 result id 掛住結果，改名只換顯示文字，唔郁個 id */
+  cqQuestionsEl.querySelectorAll(".opt-row").forEach(function(row){
+    var assigned = row.getAttribute("data-result-id") || "";
+    var isUnassigned = !assigned || !byId[assigned];
+    if (isUnassigned && assigned) row.setAttribute("data-result-id", "");
+    if (isUnassigned) assigned = "";
+    row.classList.toggle("unassigned", isUnassigned);
+    var chipsBox = row.querySelector(".cq-chips");
+    if (chipsBox){
+      chipsBox.innerHTML = "";
+      metas.forEach(function(m){
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "cq-chip" + (assigned === m.id ? " selected" : "");
+        chip.textContent = cqResultLabel(m);
+        chip.setAttribute("aria-pressed", assigned === m.id ? "true" : "false");
+        chip.addEventListener("click", function(){
+          row.setAttribute("data-result-id", m.id);
+          refreshCreator();
+        });
+        chipsBox.appendChild(chip);
+      });
+    }
+    var warn = row.querySelector(".cq-warn");
+    if (warn) warn.classList.toggle("hidden", !isUnassigned);
   });
+  /* 結果 2–8 限制：刪到得返 2 個就唔俾再刪，加到 8 個就唔俾再加 */
+  var addResBtn = document.getElementById("cq-add-result");
+  if (addResBtn) addResBtn.disabled = metas.length >= 8;
+  cqResultBlocks().forEach(function(block){
+    var del = block.querySelector(".cq-del-result");
+    if (del) del.disabled = metas.length <= 2;
+  });
+  /* 即時分數預覽 */
+  var preview = document.getElementById("cq-preview");
+  if (preview){
+    var counts = {};
+    metas.forEach(function(m){ counts[m.id] = 0; });
+    var unassignedCount = 0;
+    cqQuestionsEl.querySelectorAll(".opt-row").forEach(function(row){
+      var rid = row.getAttribute("data-result-id") || "";
+      if (rid && Object.prototype.hasOwnProperty.call(counts, rid)) counts[rid]++;
+      else unassignedCount++;
+    });
+    preview.innerHTML = "";
+    var h = document.createElement("h3"); h.textContent = "即時預覽：每個結果有幾多個選項指向佢";
+    preview.appendChild(h);
+    var ul = document.createElement("ul");
+    var zeroNames = [];
+    metas.forEach(function(m){
+      if (counts[m.id] === 0) zeroNames.push(cqResultLabel(m));
+      var li = document.createElement("li");
+      if (counts[m.id] === 0) li.className = "zero";
+      var nm = document.createElement("span"); nm.className = "pv-name"; nm.textContent = cqResultLabel(m);
+      var ct = document.createElement("span"); ct.className = "pv-count"; ct.textContent = counts[m.id] + " 個選項";
+      li.appendChild(nm); li.appendChild(ct);
+      ul.appendChild(li);
+    });
+    preview.appendChild(ul);
+    if (unassignedCount > 0){
+      var w1 = document.createElement("p"); w1.className = "pv-warn";
+      w1.textContent = "有 " + unassignedCount + " 個選項未揀結果（可能係因為原本指向嘅結果刪咗），要重新揀返先開到測驗。";
+      preview.appendChild(w1);
+    }
+    if (zeroNames.length){
+      var w2 = document.createElement("p"); w2.className = "pv-warn";
+      w2.textContent = "以下結果暫時有 0 個選項指向佢，玩嗰陣冇人會得到呢啲結果：" + zeroNames.join("、") + "。";
+      preview.appendChild(w2);
+    }
+    if (!unassignedCount && !zeroNames.length && metas.length){
+      var okp = document.createElement("p"); okp.className = "pv-ok";
+      okp.textContent = "每個結果都有選項指向佢，所有選項都揀好咗結果。";
+      preview.appendChild(okp);
+    }
+    var createBtn = document.getElementById("cq-create");
+    if (createBtn) createBtn.disabled = unassignedCount > 0;
+  }
 }
+/* 舊名保留做後備（冇其他地方再用下拉選單） */
+function refreshResultSelects(){ refreshCreator(); }
 
 function addResultRow(){
   var block = document.createElement("div"); block.className = "sub-block cq-result";
+  block.setAttribute("data-result-id", nextCqResultId());
   var head = document.createElement("div"); head.className = "row-head";
   var b = document.createElement("b"); b.textContent = "結果";
-  var rm = document.createElement("button"); rm.type = "button"; rm.className = "mini-btn"; rm.textContent = "刪除";
-  rm.addEventListener("click", function(){ block.remove(); renumberCustomForm(); refreshResultSelects(); });
+  var rm = document.createElement("button"); rm.type = "button"; rm.className = "mini-btn cq-del cq-del-result"; rm.textContent = "刪除";
+  rm.addEventListener("click", function(){
+    if (cqResultBlocks().length <= 2){
+      document.getElementById("cq-msg").textContent = "結果最少要有 2 個，唔可以再刪。";
+      return;
+    }
+    var deletedId = block.getAttribute("data-result-id") || "";
+    block.remove();
+    /* 指向被刪結果嘅選項變做未分配，要用家重新揀，唔會靜靜雞改去第二個結果 */
+    cqQuestionsEl.querySelectorAll(".opt-row").forEach(function(row){
+      if ((row.getAttribute("data-result-id") || "") === deletedId) row.setAttribute("data-result-id", "");
+    });
+    renumberCustomForm();
+    refreshCreator();
+  });
   head.appendChild(b); head.appendChild(rm);
   var f1 = document.createElement("div"); f1.className = "field";
   var l1 = document.createElement("label"); l1.textContent = "結果名";
@@ -2358,41 +2452,48 @@ function addResultRow(){
   block.appendChild(head); block.appendChild(f1); block.appendChild(f2);
   cqResultsEl.appendChild(block);
   renumberCustomForm();
+  refreshCreator();
 }
 
 function addQuestionRow(){
   var block = document.createElement("div"); block.className = "sub-block cq-question";
   var head = document.createElement("div"); head.className = "row-head";
   var b = document.createElement("b"); b.textContent = "問題";
-  var rm = document.createElement("button"); rm.type = "button"; rm.className = "mini-btn"; rm.textContent = "刪除";
-  rm.addEventListener("click", function(){ block.remove(); renumberCustomForm(); });
+  var rm = document.createElement("button"); rm.type = "button"; rm.className = "mini-btn cq-del"; rm.textContent = "刪除";
+  rm.addEventListener("click", function(){ block.remove(); renumberCustomForm(); refreshCreator(); });
   head.appendChild(b); head.appendChild(rm);
   var f = document.createElement("div"); f.className = "field";
   var l = document.createElement("label"); l.textContent = "問題內容";
   var inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 120; inp.className = "cq-qtext"; inp.placeholder = "例如：放假你最想做咩？";
   f.appendChild(l); f.appendChild(inp);
   block.appendChild(head); block.appendChild(f);
+  var metas0 = cqResultsMeta();
+  var defaultId = metas0.length ? metas0[0].id : "";
   for (var k = 0; k < 4; k++){
     var row = document.createElement("div"); row.className = "opt-row";
+    row.setAttribute("data-result-id", defaultId);
     var oi = document.createElement("input"); oi.type = "text"; oi.maxLength = 80; oi.className = "cq-otext"; oi.placeholder = "選項 " + (k + 1);
-    var sel = document.createElement("select"); sel.className = "cq-osel";
-    row.appendChild(oi); row.appendChild(sel);
+    oi.setAttribute("aria-label", "選項 " + (k + 1));
+    var chipLabel = document.createElement("p"); chipLabel.className = "cq-chip-label"; chipLabel.textContent = "揀中呢個選項，會幫邊個結果加分：";
+    var chipsBox = document.createElement("div"); chipsBox.className = "cq-chips";
+    var warn = document.createElement("p"); warn.className = "cq-warn hidden"; warn.textContent = "呢個選項原本指向嘅結果已經刪咗，請重新揀一個結果。";
+    row.appendChild(oi); row.appendChild(chipLabel); row.appendChild(chipsBox); row.appendChild(warn);
     block.appendChild(row);
   }
   cqQuestionsEl.appendChild(block);
-  refreshResultSelects();
   renumberCustomForm();
+  refreshCreator();
 }
 
 if (cqResultsEl && cqQuestionsEl){
-  cqResultsEl.addEventListener("input", function(){ refreshResultSelects(); });
+  cqResultsEl.addEventListener("input", function(){ refreshCreator(); });
   document.getElementById("cq-add-result").addEventListener("click", function(){
     if (cqResultsEl.querySelectorAll(".cq-result").length >= 8){
       document.getElementById("cq-msg").textContent = "結果最多 8 個。";
       return;
     }
     addResultRow();
-    refreshResultSelects();
+    refreshCreator();
   });
   document.getElementById("cq-add-question").addEventListener("click", function(){
     if (cqQuestionsEl.querySelectorAll(".cq-question").length >= 30){
@@ -2407,14 +2508,19 @@ if (cqResultsEl && cqQuestionsEl){
     var desc = document.getElementById("cq-desc").value.trim();
     if (!title){ msg.textContent = "要填測驗標題先開到。"; return; }
     var ok = true;
+    var hasUnassigned = false;
     var results = [];
-    cqResultsEl.querySelectorAll(".cq-result").forEach(function(block){
+    var idToIndex = {};
+    cqResultBlocks().forEach(function(block, i){
       var n = block.querySelector(".cq-rname").value.trim();
       var d = block.querySelector(".cq-rdesc").value.trim();
       if (!n) ok = false;
+      var rid = block.getAttribute("data-result-id") || "";
+      if (rid) idToIndex[rid] = i;
       results.push({ name: n, desc: d });
     });
-    if (results.length < 2 || !ok){ msg.textContent = "最少要有 2 個結果，同埋每個結果都要有個名。"; return; }
+    if (results.length < 2 || results.length > 8){ msg.textContent = "結果要有 2 至 8 個。"; return; }
+    if (!ok){ msg.textContent = "每個結果都要有個名。"; return; }
     var questions = [];
     cqQuestionsEl.querySelectorAll(".cq-question").forEach(function(block){
       var qt = block.querySelector(".cq-qtext").value.trim();
@@ -2422,12 +2528,16 @@ if (cqResultsEl && cqQuestionsEl){
       var opts = [];
       block.querySelectorAll(".opt-row").forEach(function(row){
         var t = row.querySelector(".cq-otext").value.trim();
-        var ri = Number(row.querySelector(".cq-osel").value || 0);
+        var rid = row.getAttribute("data-result-id") || "";
+        var isAssigned = !!rid && Object.prototype.hasOwnProperty.call(idToIndex, rid);
+        if (!isAssigned) hasUnassigned = true;
         if (!t) ok = false;
-        opts.push({ text: t, result: "r" + ri });
+        /* 儲存嗰陣先將內部 id 轉返做現有玩法用開嘅 r0、r1…，確保舊測驗同計分完全唔變 */
+        opts.push({ text: t, result: "r" + (isAssigned ? idToIndex[rid] : 0) });
       });
       questions.push({ question: qt, options: opts });
     });
+    if (hasUnassigned){ msg.textContent = "有選項未揀結果（原本指向嘅結果可能刪咗），請重新揀返先開到。"; refreshCreator(); return; }
     if (!questions.length || !ok){ msg.textContent = "每條問題同每個選項都要填好先開到。"; return; }
     var id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
     var quiz = { id: id, title: title, description: desc, questions: questions, results: results };
@@ -2454,12 +2564,8 @@ if (cqResultsEl && cqQuestionsEl){
   });
   addResultRow(); addResultRow(); addResultRow();
   addQuestionRow(); addQuestionRow(); addQuestionRow();
-  refreshResultSelects();
+  refreshCreator();
 }
-
-document.getElementById("btn-copy-sql").addEventListener("click", function(){
-  copyTextToClipboard(document.getElementById("sql-box").textContent, document.getElementById("sql-msg"));
-});
 
 /* ---------- #/play/<id> 路由 ---------- */
 function checkHash(){
