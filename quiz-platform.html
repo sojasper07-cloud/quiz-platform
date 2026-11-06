@@ -135,6 +135,25 @@ h1{font-family:"Noto Serif TC",serif;font-size:clamp(2.1rem,8vw,3.4rem);line-hei
 .opt .opt-name{font-size:16.5px;font-weight:800;display:block}
 .opt .opt-desc{font-size:13.5px;color:var(--muted);display:block;margin-top:2px;line-height:1.55}
 .quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.quiz-top-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+#btn-restart{border:1.5px solid var(--line);background:var(--surface2);color:var(--ink);font-weight:900;padding:8px 14px;box-shadow:3px 3px 0 var(--shadow)}
+#btn-restart:hover{background:var(--yellow-soft)}
+.vote-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;flex-basis:100%}
+.vote-btn{flex:1;appearance:none;border:1.5px solid var(--line);background:var(--surface2);color:var(--ink);font-family:inherit;font-size:14px;font-weight:800;padding:9px 10px;cursor:pointer}
+.vote-btn:hover{background:var(--yellow-soft)}
+.vote-btn:disabled{opacity:.45;cursor:not-allowed}
+.vote-btn:disabled:hover{background:var(--surface2)}
+.vote-note{flex-basis:100%;font-size:12.5px;color:var(--muted);font-weight:600;line-height:1.5}
+.vote-btn.voted-like{background:var(--teal);color:#fff}
+.vote-btn.voted-dislike{background:var(--coral);color:#171714}
+.rank-h{font-size:15px;font-weight:900;margin:18px 0 8px}
+.rank-list{margin:0;padding:0;list-style:none}
+.rank-row{display:flex;width:100%;align-items:baseline;gap:10px;background:var(--surface2);border:1.5px solid var(--line-soft);padding:10px 12px;margin-bottom:8px;cursor:pointer;font-family:inherit;color:var(--ink);text-align:left;font-size:14.5px}
+.rank-row:hover{border-color:var(--line)}
+.rank-no{font-family:"Noto Serif TC",serif;font-weight:900;font-size:17px;color:var(--coral);min-width:22px}
+.rank-title{font-weight:800;flex:1;line-height:1.45}
+.rank-count{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap}
+.rank-empty{font-size:14px;color:var(--muted);line-height:1.7;margin:0 0 6px}
 .link-btn{background:none;border:0;font-family:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer;padding:10px 4px}
 .link-btn:disabled{opacity:.35;cursor:default}
 .scale-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
@@ -329,6 +348,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>8 個</b>角色</span>
         </div>
+        <div class="vote-row" data-vote-for="chiikawa">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
+        </div>
         <button class="btn" type="button" data-start="chiikawa">開始玩呢份</button>
       </div>
     </article>
@@ -343,6 +366,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">共 <b>14 題</b></span>
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>8 個</b>角色</span>
+        </div>
+        <div class="vote-row" data-vote-for="idv">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
         </div>
         <button class="btn teal" type="button" data-start="idv">開始玩呢份</button>
       </div>
@@ -359,6 +386,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>8 個</b>角色</span>
         </div>
+        <div class="vote-row" data-vote-for="conan">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
+        </div>
         <button class="btn yellow" type="button" data-start="conan">開始玩呢份</button>
       </div>
     </article>
@@ -373,6 +404,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">共 <b>16 題</b></span>
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>6 種</b>結果</span>
+        </div>
+        <div class="vote-row" data-vote-for="ai">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
         </div>
         <button class="btn teal" type="button" data-start="ai">開始玩呢份</button>
       </div>
@@ -390,6 +425,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>16 種</b>結果</span>
         </div>
+        <div class="vote-row" data-vote-for="items">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
+        </div>
         <button class="btn teal" type="button" data-start="items">開始玩呢份</button>
       </div>
     </article>
@@ -404,6 +443,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">共 <b>12 題</b></span>
           <span class="chip">約 <b>2 分鐘</b></span>
           <span class="chip"><b>16 種</b>食物人格</span>
+        </div>
+        <div class="vote-row" data-vote-for="food">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
         </div>
         <button class="btn" type="button" data-start="food">開始玩呢份</button>
       </div>
@@ -420,6 +463,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
           <span class="chip">約 <b>1 分鐘</b></span>
           <span class="chip"><b>4 種</b>朋友類型</span>
         </div>
+        <div class="vote-row" data-vote-for="friend">
+          <button class="vote-btn" type="button" data-vote="1" aria-pressed="false">讚好 · <span data-like-count>0</span></button>
+          <button class="vote-btn" type="button" data-vote="-1" aria-pressed="false">唔鍾意 · <span data-dislike-count>0</span></button>
+        </div>
         <button class="btn yellow" type="button" data-start="friend">開始玩呢份</button>
       </div>
     </article>
@@ -427,9 +474,21 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 
   <p class="home-foot">七份都係純屬娛樂，唔係心理評估嚟㗎。<br>玩完記得 send 俾朋友，睇下大家夾唔夾！</p>
 
+  <div class="section" id="ranking-section">
+    <h2>排行榜</h2>
+    <p class="hint">內置同公開嘅訪客測驗一齊計（私人測驗唔會上榜）。㩒任何一行就即刻去玩嗰份測驗。</p>
+    <h3 class="rank-h">最多人玩 Top 10</h3>
+    <p class="hint">以完成次數計：答完一份測驗、去到結果頁，就計一次。</p>
+    <ol class="rank-list" id="rank-popular"></ol>
+    <h3 class="rank-h">最多人讚好 Top 10</h3>
+    <p class="hint">以淨讚好計（讚好減唔鍾意）。要玩完一份測驗先可以投票：玩完之後，結果頁同測驗卡片嘅「讚好／唔鍾意」就會解鎖。一人一票，㩒多次同一個掣可以取消，㩒另一個掣可以轉投，唔會重複計。</p>
+    <ol class="rank-list" id="rank-liked"></ol>
+    <p class="stats-note" id="rank-note"></p>
+  </div>
+
   <div class="section" id="custom-section">
     <h2>訪客開嘅測驗</h2>
-    <p class="hint">呢度係訪客自己開嘅測驗，唔使登入都玩得。每份都有專屬路徑（#/play/…），複製成條連結俾朋友就一齊玩到。</p>
+    <p class="hint">呢度係訪客自己開嘅測驗，唔使登入都玩得。每份都有專屬路徑（#/play/…），複製成條連結俾朋友就一齊玩到。私人測驗唔會出現喺呢度，要用專屬連結加入場密碼先玩得。</p>
     <div id="custom-list"></div>
     <p class="copied-msg" id="custom-msg" role="status"></p>
   </div>
@@ -441,6 +500,13 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
       <div class="field"><label for="cq-title">測驗標題</label><input type="text" id="cq-title" maxlength="60" placeholder="例如：你係邊種茶餐廳常客？"></div>
       <div class="field"><label for="cq-desc">簡介（可留空）</label><textarea id="cq-desc" maxlength="200" placeholder="一句講下呢份測驗玩咩"></textarea></div>
       <div class="field"><label for="cq-password">刪除密碼（必填）</label><input type="password" id="cq-password" maxlength="64" autocomplete="new-password" placeholder="最少 4 個字元"><p class="hint" style="margin:6px 0 0">記住呢個密碼，之後刪呢份測驗要用；唔見咗就刪唔到，連平台都幫唔到你拎返。</p></div>
+      <div class="field"><label>公開定私人</label>
+        <div class="cq-chips" id="cq-vis-chips">
+          <button type="button" class="cq-chip selected" data-vis="public" aria-pressed="true">公開 · 會出現喺清單同排行榜</button>
+          <button type="button" class="cq-chip" data-vis="private" aria-pressed="false">私人 · 唔上清單同排行榜，要連結加密碼先玩得</button>
+        </div>
+      </div>
+      <div class="field hidden" id="cq-access-field"><label for="cq-access">入場密碼（私人測驗用）</label><input type="password" id="cq-access" maxlength="64" autocomplete="new-password" placeholder="最少 4 個字元"><p class="hint" style="margin:6px 0 0">同刪除密碼分開：呢個係俾朋友入嚟玩用嘅，唔記得就冇人入到嚟玩。密碼一樣只會存雜湊值，唔會存明文。</p></div>
     </div>
     <p class="form-h">結果（最少 2 個，最多 8 個）</p>
     <div id="cq-results"></div>
@@ -467,7 +533,10 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
 
 <!-- ===== QUIZ (shared shell) ===== -->
 <section id="screen-quiz" class="hidden" aria-live="polite">
-  <button class="back-link" id="btn-quit" type="button">← 返去揀其他測驗</button>
+  <div class="quiz-top-row">
+    <button class="back-link" id="btn-quit" type="button">← 返去揀其他測驗</button>
+    <button class="link-btn" id="btn-restart" type="button">重新開始</button>
+  </div>
   <div id="quiz-del-wrap" class="hidden">
     <button class="link-btn del-link" id="btn-del-quiz" type="button">刪除呢份測驗</button>
     <div id="quiz-del-box"></div>
@@ -487,8 +556,21 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     <div class="quiz-nav">
       <button class="link-btn" id="btn-back" type="button">← 上一題</button>
       <button class="link-btn hidden" id="btn-next-friend" type="button">下一題 →</button>
-      <button class="link-btn" id="btn-restart" type="button">重新開始</button>
     </div>
+  </div>
+</section>
+
+<!-- ===== PRIVATE GATE ===== -->
+<section id="screen-gate" class="hidden">
+  <button class="back-link" id="btn-gate-home" type="button">← 返去揀其他測驗</button>
+  <div class="section" style="margin-top:10px">
+    <h2>呢份係私人測驗</h2>
+    <p class="hint">「<span id="gate-title"></span>」唔會出現喺主頁清單同排行榜，要入返開測驗嗰位朋友俾你嘅入場密碼先玩得。</p>
+    <div class="nick-row">
+      <input type="password" id="gate-pw" maxlength="64" placeholder="入場密碼" aria-label="入場密碼" autocomplete="off">
+      <button class="btn teal" id="gate-go" type="button">入去玩</button>
+    </div>
+    <p class="copied-msg" id="gate-msg" role="status"></p>
   </div>
 </section>
 
@@ -545,6 +627,12 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
   </div>
   <div class="copied-msg" id="copied-msg" role="status"></div>
 
+  <div class="section">
+    <h2>覺得呢份測驗點？</h2>
+    <p class="hint">你已經玩完呢份測驗，可以投票喇：一人一票，之後可以改票，但唔會重複計。</p>
+    <div data-result-vote></div>
+  </div>
+
   <section class="archive" id="archive">
     <h2>你今次開頁玩嘅紀錄</h2>
     <div class="arch-grid">
@@ -595,6 +683,12 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
     </div>
   </div>
 
+  <div class="section">
+    <h2>覺得呢份測驗點？</h2>
+    <p class="hint">你已經玩完呢份測驗，可以投票喇：一人一票，之後可以改票，但唔會重複計。</p>
+    <div data-result-vote></div>
+  </div>
+
   <div class="section stats-panel" data-stats>
     <h2>結果共享排名</h2>
     <p class="hint">可以揀匿名提交，或者用一個花名提交（最多 20 個字），花名會出現喺下面嘅最新提交榜。千祈唔好用真名；呢度唔會收集任何電郵。每個結果喺今次開頁只可以提交一次，所有人打嘅字都只會以純文字顯示。</p>
@@ -634,6 +728,12 @@ footer.page-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--
       </div>
       <p class="result-footnote" id="cat-footnote"></p>
     </div>
+  </div>
+
+  <div class="section">
+    <h2>覺得呢份測驗點？</h2>
+    <p class="hint">你已經玩完呢份測驗，可以投票喇：一人一票，之後可以改票，但唔會重複計。</p>
+    <div data-result-vote></div>
   </div>
 
   <div class="section stats-panel" data-stats>
@@ -1436,6 +1536,7 @@ var elQuiz = document.getElementById("screen-quiz");
 var elMbti = document.getElementById("screen-result-mbti");
 var elFriend = document.getElementById("screen-result-friend");
 var elCat = document.getElementById("screen-result-cat");
+var elGate = document.getElementById("screen-gate");
 
 var mode = null;         // "food" | "items" | "friend" | "ai" | "chiikawa"
 var current = 0;
@@ -1474,6 +1575,7 @@ function show(screen){
   elMbti.classList.toggle("hidden", screen !== "mbti");
   elFriend.classList.toggle("hidden", screen !== "friend");
   elCat.classList.toggle("hidden", screen !== "cat");
+  elGate.classList.toggle("hidden", screen !== "gate");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1792,6 +1894,8 @@ function finishMbti(){
   });
   renderArchive(mode);
   statsCtx = { quizId: mode, resultType: type, types: Object.keys(isFood ? FOOD_RESULTS : ITEMS_RESULTS) };
+  recordPlay(mode);
+  renderResultVote("screen-result-mbti");
   refreshStats();
   show("mbti");
 }
@@ -1901,6 +2005,8 @@ function finishCat(){
     resultType: result.name,
     types: cd.order.map(function(id){ return cd.results[id].name; })
   };
+  recordPlay(statsCtx.quizId);
+  renderResultVote("screen-result-cat");
   refreshStats();
   show("cat");
 }
@@ -1959,6 +2065,8 @@ function finishFriend(){
     resultType: result.name,
     types: FRIEND_ORDER.map(function(id){ return FRIEND_RESULTS[id].name; })
   };
+  recordPlay("friend");
+  renderResultVote("screen-result-friend");
   refreshStats();
   show("friend");
 }
@@ -2090,17 +2198,18 @@ function fetchSubmissions(quizId){
             // 連唔到 Supabase（多數係 Muse 卡片預覽封鎖咗對外網絡）：
             // 跌返本頁模式顯示，唔好成個統計區死喺度。
             sbNetworkBlocked = true;
-            return localSubmissions.filter(function(s){ return s.quiz_id === quizId; });
+            return localSubmissions.filter(function(s){ return s.quiz_id === quizId && !isActivityType(s.result_type); });
           }
           throw res.error;
         }
-        return res.data || [];
+        return (res.data || []).filter(function(s){ return !isActivityType(s.result_type); });
       });
   }
-  return Promise.resolve(localSubmissions.filter(function(s){ return s.quiz_id === quizId; }));
+  return Promise.resolve(localSubmissions.filter(function(s){ return s.quiz_id === quizId && !isActivityType(s.result_type); }));
 }
 
 function refreshStats(){
+  refreshRankings();
   if (!statsCtx) return;
   var done = !!submittedKeys[statsKey()];
   document.querySelectorAll("[data-stats]").forEach(function(panel){
@@ -2242,10 +2351,320 @@ document.querySelectorAll("[data-submit]").forEach(function(btn){
   });
 });
 
+/* ================= 排行榜 + 讚好／唔鍾意 ================= */
+/* 完成次數同讚好票同結果提交共用 submissions 表：result_type 用
+   __play__、__like__、__dislike__、__unlike__、__undislike__ 呢啲內部標記，
+   fetchSubmissions 會濾走晒，唔會污染結果分佈同最新提交榜。
+   讚好用事件記錄：取消或者轉投嗰陣補返一個取消事件，淨數先係真數，
+   咁就唔使開新表，現有 Supabase 設定即刻共享到。
+   投票要玩完先解鎖：myPlays 記住呢個瀏覽器玩完咗邊啲測驗，未玩完嗰啲
+   投票掣會鎖住；一人一票靠 myVotes——轉投先補取消事件再補新票，
+   所以點改都唔會重複計。myPlays、myVotes 同私人測驗嘅解鎖狀態
+   （unlockedPrivate）會存入呢個瀏覽器嘅 localStorage，refresh 之後
+   照樣記得：玩完過嘅測驗保持解鎖、投過嘅票唔會俾你再投多一次。
+   每份測驗獨立記錄，內置同訪客自訂（包括私人）測驗一視同仁。 */
+var ACT_PLAY = "__play__", ACT_LIKE = "__like__", ACT_DISLIKE = "__dislike__",
+    ACT_UNLIKE = "__unlike__", ACT_UNDISLIKE = "__undislike__";
+function isActivityType(t){ return typeof t === "string" && t.indexOf("__") === 0; }
+
+var BUILTIN_META = [
+  { id: "chiikawa", title: "你係邊個 Chiikawa 角色？" },
+  { id: "idv", title: "你係邊個《第五人格》角色？" },
+  { id: "conan", title: "你係邊個《名偵探柯南》角色？" },
+  { id: "ai", title: "你係邊個 AI Chatbot？" },
+  { id: "items", title: "揀你最鍾意嘅嘢，睇穿你性格" },
+  { id: "food", title: "你食咩，就知你係邊種 MBTI" },
+  { id: "friend", title: "你係邊種朋友？" }
+];
+var myVotes = {};   // 呢個瀏覽器我投咗咩：quizId -> 1 / -1（存入 localStorage，refresh 唔會唔見）
+var myPlays = {};   // 呢個瀏覽器我玩完咗邊啲：quizId -> true（玩完先解鎖嗰份嘅投票，同樣存入 localStorage）
+var activityCounts = { play: {}, like: {}, dislike: {} };
+
+/* 每個瀏覽器一票嘅持久記錄：玩完／解鎖狀態、我嘅票、私人測驗入場解鎖，
+   三樣一齊存入 localStorage；每次有改動即刻 saveBrowserState() 寫返去。
+   localStorage 用唔到（例如無痕模式封鎖）嗰陣就退返今次開頁模式，唔會出錯。 */
+var LS_STATE_KEY = "quizPlatformState.v1";
+function loadBrowserState(){
+  try {
+    var raw = window.localStorage.getItem(LS_STATE_KEY);
+    if (!raw) return;
+    var s = JSON.parse(raw);
+    if (!s) return;
+    if (s.plays && typeof s.plays === "object") myPlays = s.plays;
+    if (s.votes && typeof s.votes === "object") myVotes = s.votes;
+    if (s.priv && typeof s.priv === "object") unlockedPrivate = s.priv;
+  } catch (e) { /* 讀唔到就當新瀏覽器 */ }
+}
+function saveBrowserState(){
+  try {
+    window.localStorage.setItem(LS_STATE_KEY, JSON.stringify({
+      plays: myPlays,
+      votes: myVotes,
+      priv: (typeof unlockedPrivate !== "undefined" && unlockedPrivate) ? unlockedPrivate : {}
+    }));
+  } catch (e) { /* 存唔到都唔好阻住投票流程 */ }
+}
+loadBrowserState();
+
+function quizTitleFor(id){
+  for (var i = 0; i < BUILTIN_META.length; i++) if (BUILTIN_META[i].id === id) return BUILTIN_META[i].title;
+  if (typeof customQuizzes !== "undefined" && customQuizzes[id]) return customQuizzes[id].title;
+  return id;
+}
+function isBuiltinQuiz(id){
+  for (var i = 0; i < BUILTIN_META.length; i++) if (BUILTIN_META[i].id === id) return true;
+  return false;
+}
+
+function insertActivityRaw(quizId, type){
+  var row = { quiz_id: quizId, nickname: null, result_type: type, created_at: new Date().toISOString() };
+  if (sb && !sbNetworkBlocked){
+    return sb.from("submissions").insert({ quiz_id: quizId, nickname: null, result_type: type })
+      .then(function(res){
+        if (res.error){
+          if (res.error.network){ sbNetworkBlocked = true; localSubmissions.unshift(row); }
+        }
+      })
+      .catch(function(){ sbNetworkBlocked = true; localSubmissions.unshift(row); });
+  }
+  localSubmissions.unshift(row);
+  return Promise.resolve();
+}
+
+function recordPlay(quizId){
+  if (!quizId) return;
+  myPlays[quizId] = true;   /* 一去到結果頁就解鎖呢份測驗嘅投票 */
+  saveBrowserState();       /* 記低呢個瀏覽器玩完咗呢份，refresh 之後保持解鎖 */
+  updateVoteUI();
+  insertActivityRaw(quizId, ACT_PLAY).then(function(){ refreshRankings(); });
+}
+
+function fetchAllActivity(){
+  if (sb && !sbNetworkBlocked){
+    return sb.from("submissions").select("quiz_id,result_type")
+      .then(function(res){
+        if (res.error){
+          if (res.error.network) sbNetworkBlocked = true;
+          return localSubmissions.slice();
+        }
+        return res.data || [];
+      })
+      .catch(function(){ sbNetworkBlocked = true; return localSubmissions.slice(); });
+  }
+  return Promise.resolve(localSubmissions.slice());
+}
+
+function computeActivity(rows){
+  var play = {}, like = {}, dislike = {};
+  rows.forEach(function(r){
+    if (!r || !r.quiz_id) return;
+    if (r.result_type === ACT_PLAY) play[r.quiz_id] = (play[r.quiz_id] || 0) + 1;
+    else if (r.result_type === ACT_LIKE) like[r.quiz_id] = (like[r.quiz_id] || 0) + 1;
+    else if (r.result_type === ACT_UNLIKE) like[r.quiz_id] = (like[r.quiz_id] || 0) - 1;
+    else if (r.result_type === ACT_DISLIKE) dislike[r.quiz_id] = (dislike[r.quiz_id] || 0) + 1;
+    else if (r.result_type === ACT_UNDISLIKE) dislike[r.quiz_id] = (dislike[r.quiz_id] || 0) - 1;
+  });
+  Object.keys(like).forEach(function(k){ if (like[k] < 0) like[k] = 0; });
+  Object.keys(dislike).forEach(function(k){ if (dislike[k] < 0) dislike[k] = 0; });
+  activityCounts = { play: play, like: like, dislike: dislike };
+}
+
+function updateVoteUI(){
+  document.querySelectorAll("[data-vote-for]").forEach(function(row){
+    var id = row.getAttribute("data-vote-for");
+    var lc = row.querySelector("[data-like-count]");
+    var dc = row.querySelector("[data-dislike-count]");
+    if (lc) lc.textContent = activityCounts.like[id] || 0;
+    if (dc) dc.textContent = activityCounts.dislike[id] || 0;
+    var mine = myVotes[id] || 0;
+    var unlocked = !!myPlays[id];
+    var note = row.querySelector("[data-vote-note]");
+    if (note){
+      note.textContent = unlocked ? "" : "玩完呢份測驗先可以投票 · 每個瀏覽器一票";
+      note.classList.toggle("hidden", unlocked);
+    }
+    row.querySelectorAll(".vote-btn").forEach(function(btn){
+      var v = parseInt(btn.getAttribute("data-vote"), 10);
+      btn.classList.toggle("voted-like", v === 1 && mine === 1);
+      btn.classList.toggle("voted-dislike", v === -1 && mine === -1);
+      btn.setAttribute("aria-pressed", mine === v ? "true" : "false");
+      btn.disabled = !unlocked;
+    });
+  });
+}
+
+function wireVoteRow(row){
+  var id = row.getAttribute("data-vote-for");
+  row.querySelectorAll(".vote-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){ castVote(id, parseInt(btn.getAttribute("data-vote"), 10)); });
+  });
+}
+
+function buildVoteRow(quizId){
+  var row = document.createElement("div");
+  row.className = "vote-row";
+  row.setAttribute("data-vote-for", quizId);
+  row.style.margin = "10px 0 2px";
+  var like = document.createElement("button");
+  like.type = "button"; like.className = "vote-btn"; like.setAttribute("data-vote", "1"); like.setAttribute("aria-pressed", "false");
+  like.appendChild(document.createTextNode("讚好 · "));
+  var ls = document.createElement("span"); ls.setAttribute("data-like-count", ""); ls.textContent = activityCounts.like[quizId] || 0;
+  like.appendChild(ls);
+  var dis = document.createElement("button");
+  dis.type = "button"; dis.className = "vote-btn"; dis.setAttribute("data-vote", "-1"); dis.setAttribute("aria-pressed", "false");
+  dis.appendChild(document.createTextNode("唔鍾意 · "));
+  var ds = document.createElement("span"); ds.setAttribute("data-dislike-count", ""); ds.textContent = activityCounts.dislike[quizId] || 0;
+  dis.appendChild(ds);
+  var note = document.createElement("span");
+  note.className = "vote-note"; note.setAttribute("data-vote-note", "");
+  row.appendChild(like); row.appendChild(dis); row.appendChild(note);
+  wireVoteRow(row);
+  /* 起好嗰陣即刻跟返鎖定狀態，唔使等下一次 refresh */
+  var unlocked0 = !!myPlays[quizId];
+  like.disabled = !unlocked0; dis.disabled = !unlocked0;
+  note.textContent = unlocked0 ? "" : "玩完呢份測驗先可以投票 · 每個瀏覽器一票";
+  note.classList.toggle("hidden", unlocked0);
+  return row;
+}
+
+/* 結果頁嘅投票區：完成一份測驗之後，將嗰份嘅投票掣放入結果頁 */
+function renderResultVote(screenId){
+  var screen = document.getElementById(screenId);
+  if (!screen || !statsCtx) return;
+  var slot = screen.querySelector("[data-result-vote]");
+  if (!slot) return;
+  slot.innerHTML = "";
+  slot.appendChild(buildVoteRow(statsCtx.quizId));
+}
+
+function castVote(quizId, vote){
+  if (!myPlays[quizId]) return;   /* 未玩完呢份測驗，唔俾投票 */
+  var cur = myVotes[quizId] || 0;
+  var events = [];
+  if (cur === vote){
+    events.push(vote === 1 ? ACT_UNLIKE : ACT_UNDISLIKE);
+    myVotes[quizId] = 0;
+  } else {
+    if (cur === 1) events.push(ACT_UNLIKE);
+    if (cur === -1) events.push(ACT_UNDISLIKE);
+    events.push(vote === 1 ? ACT_LIKE : ACT_DISLIKE);
+    myVotes[quizId] = vote;
+  }
+  saveBrowserState();   /* 記低而家呢一票（或者取消咗），refresh 之後唔會俾我再投多一次 */
+  /* 先樂觀更新畫面，再逐個事件寫入，寫完再拉一次真數對齊 */
+  events.forEach(function(t){
+    if (t === ACT_LIKE) activityCounts.like[quizId] = (activityCounts.like[quizId] || 0) + 1;
+    if (t === ACT_UNLIKE) activityCounts.like[quizId] = Math.max(0, (activityCounts.like[quizId] || 0) - 1);
+    if (t === ACT_DISLIKE) activityCounts.dislike[quizId] = (activityCounts.dislike[quizId] || 0) + 1;
+    if (t === ACT_UNDISLIKE) activityCounts.dislike[quizId] = Math.max(0, (activityCounts.dislike[quizId] || 0) - 1);
+  });
+  renderRankings();
+  updateVoteUI();
+  var chain = Promise.resolve();
+  events.forEach(function(t){
+    chain = chain.then(function(){ return insertActivityRaw(quizId, t); });
+  });
+  chain.then(function(){ refreshRankings(); });
+}
+
+function openRankedQuiz(id){
+  if (isBuiltinQuiz(id)){ startQuiz(id); return; }
+  if (typeof customQuizzes !== "undefined" && customQuizzes[id]){ playCustom(customQuizzes[id]); return; }
+  loadCustomQuizById(id);
+}
+
+function buildRankList(el, entries, countText, emptyText){
+  if (!el) return;
+  el.innerHTML = "";
+  if (!entries.length){
+    var p = document.createElement("p");
+    p.className = "rank-empty";
+    p.textContent = emptyText;
+    el.appendChild(p);
+    return;
+  }
+  entries.forEach(function(e, i){
+    var li = document.createElement("li");
+    var btn = document.createElement("button");
+    btn.type = "button"; btn.className = "rank-row";
+    var no = document.createElement("span"); no.className = "rank-no"; no.textContent = String(i + 1);
+    var tt = document.createElement("span"); tt.className = "rank-title"; tt.textContent = quizTitleFor(e.id);
+    var ct = document.createElement("span"); ct.className = "rank-count"; ct.textContent = countText(e);
+    btn.appendChild(no); btn.appendChild(tt); btn.appendChild(ct);
+    btn.addEventListener("click", function(){ openRankedQuiz(e.id); });
+    li.appendChild(btn);
+    el.appendChild(li);
+  });
+}
+
+function renderRankings(){
+  var ids = BUILTIN_META.map(function(m){ return m.id; });
+  /* 私人測驗唔上任何排行榜：完成同讚好照計入活動紀錄，但唔會列出嚟 */
+  function isPrivateId(id){
+    return typeof customQuizzes !== "undefined" && !!(customQuizzes[id] && customQuizzes[id].isPrivate);
+  }
+  if (typeof customQuizzes !== "undefined"){
+    Object.keys(customQuizzes).forEach(function(id){ if (!isPrivateId(id) && ids.indexOf(id) < 0) ids.push(id); });
+  }
+  [activityCounts.play, activityCounts.like, activityCounts.dislike].forEach(function(map){
+    Object.keys(map).forEach(function(id){ if (!isPrivateId(id) && ids.indexOf(id) < 0) ids.push(id); });
+  });
+  var pop = ids.map(function(id){ return { id: id, n: activityCounts.play[id] || 0 }; })
+    .filter(function(e){ return e.n > 0; })
+    .sort(function(a, b){ return b.n - a.n; })
+    .slice(0, 10);
+  var liked = ids.map(function(id){
+      var l = activityCounts.like[id] || 0, d = activityCounts.dislike[id] || 0;
+      return { id: id, likes: l, dislikes: d, net: l - d };
+    })
+    .filter(function(e){ return e.net > 0; })
+    .sort(function(a, b){ return (b.net - a.net) || (b.likes - a.likes); })
+    .slice(0, 10);
+  buildRankList(document.getElementById("rank-popular"), pop,
+    function(e){ return e.n + " 次完成"; },
+    "暫時未有完成紀錄——玩完一份測驗，佢就會上榜。");
+  buildRankList(document.getElementById("rank-liked"), liked,
+    function(e){ return "淨讚好 " + e.net + "（讚好 " + e.likes + " · 唔鍾意 " + e.dislikes + "）"; },
+    "暫時未有讚好紀錄——玩完一份測驗，喺結果頁讚好佢，佢就會上榜。");
+  var note = document.getElementById("rank-note");
+  if (note){
+    note.textContent = (sb && !sbNetworkBlocked)
+      ? "兩個排行榜都係所有訪客共享嘅即時統計，由 Supabase 提供。"
+      : (sb
+        ? "而家呢個畫面連唔到 Supabase（例如喺 Muse 卡片預覽入面開），排行榜只會計今次開頁嘅紀錄；用公開連結喺普通瀏覽器開，先會見到共享排名。"
+        : "而家係本機模式，排行榜只會計今次開頁嘅紀錄；接通 Supabase 之後就會變成所有訪客共享嘅排名。");
+  }
+}
+
+function refreshRankings(){
+  fetchAllActivity()
+    .then(function(rows){
+      computeActivity(rows);
+      renderRankings();
+      updateVoteUI();
+    })
+    .catch(function(){
+      renderRankings();
+      updateVoteUI();
+    });
+}
+
+document.querySelectorAll(".vote-row[data-vote-for]").forEach(function(row){
+  if (!row.querySelector("[data-vote-note]")){
+    var n = document.createElement("span");
+    n.className = "vote-note"; n.setAttribute("data-vote-note", "");
+    row.appendChild(n);
+  }
+  wireVoteRow(row);
+});
+
 /* ================= 訪客自訂測驗 ================= */
 var customQuiz = null;
 var customQuizzes = {};   // id -> quiz
 var lastCreatedId = null;
+var cqVis = "public";          // 開測驗表單而家揀咗公開定私人
+var unlockedPrivate = unlockedPrivate || {};   // 呢個瀏覽器已入啱入場密碼嘅私人測驗：quizId -> true（存入 localStorage，唔好覆蓋 loadBrowserState 還原返嚟嘅值）
+var gateQuiz = null;           // 密碼閘而家等緊入密碼嘅私人測驗
 
 function normalizeCustom(raw){
   return {
@@ -2254,20 +2673,52 @@ function normalizeCustom(raw){
     description: raw.description || "",
     questions: raw.questions || [],
     results: raw.results || [],
-    creatorCode: raw.creator_code || ""
+    creatorCode: raw.creator_code || "",
+    isPrivate: !!raw.is_private,
+    accessCode: raw.access_code || ""
   };
 }
 
 function playCustom(quiz){
+  /* 私人測驗要先過密碼閘：入啱入場密碼（同存落去嘅雜湊比對）先玩得，
+     入啱一次會記低落呢個瀏覽器（localStorage），refresh 之後唔使再入。公開測驗唔受影響。 */
+  if (quiz.isPrivate && !unlockedPrivate[quiz.id]){ openGate(quiz); return; }
   customQuiz = quiz;
   startQuiz("custom");
+}
+
+function openGate(quiz){
+  gateQuiz = quiz;
+  document.getElementById("gate-title").textContent = quiz.title;
+  document.getElementById("gate-pw").value = "";
+  document.getElementById("gate-msg").textContent = "";
+  show("gate");
+}
+
+function tryGate(){
+  if (!gateQuiz) return;
+  var pw = document.getElementById("gate-pw").value;
+  var msg = document.getElementById("gate-msg");
+  if (!pw){ msg.textContent = "要入入場密碼先玩得。"; return; }
+  var quiz = gateQuiz;
+  hashPassword(pw).then(function(h){
+    if (quiz.accessCode && h === quiz.accessCode){
+      unlockedPrivate[quiz.id] = true;
+      saveBrowserState();   /* 呢個瀏覽器入啱過，refresh 之後唔使再入 */
+      gateQuiz = null;
+      playCustom(quiz);
+    } else {
+      msg.textContent = "密碼唔啱，入唔到。再試下，或者問返開測驗嗰位朋友。";
+    }
+  });
 }
 
 function renderCustomList(){
   var list = document.getElementById("custom-list");
   if (!list) return;
   list.innerHTML = "";
-  var ids = Object.keys(customQuizzes);
+  /* 私人測驗唔會出現喺主頁清單，只可以經專屬連結加入場密碼玩 */
+  var ids = Object.keys(customQuizzes).filter(function(id){ return !customQuizzes[id].isPrivate; });
   if (!ids.length){
     var p = document.createElement("p");
     p.className = "arch-empty";
@@ -2307,7 +2758,7 @@ function renderCustomList(){
       }
     });
     btns.appendChild(play); btns.appendChild(copy); btns.appendChild(delBtn);
-    item.appendChild(info); item.appendChild(btns); item.appendChild(delBox);
+    item.appendChild(info); item.appendChild(btns); item.appendChild(buildVoteRow(id)); item.appendChild(delBox);
     list.appendChild(item);
   });
 }
@@ -2319,7 +2770,9 @@ function saveCustomQuiz(quiz){
     return sb.from("quizzes").insert({
       id: quiz.id, title: quiz.title, description: quiz.description,
       questions: quiz.questions, results: quiz.results,
-      creator_code: quiz.creatorCode || null
+      creator_code: quiz.creatorCode || null,
+      is_private: !!quiz.isPrivate,
+      access_code: quiz.accessCode || null
     }).then(function(res){ return !res.error; }).catch(function(){ return false; });
   }
   return Promise.resolve(false);
@@ -2353,6 +2806,7 @@ function fetchCustomQuizzes(){
         customQuizzes[q.id] = q;
       });
       renderCustomList();
+      refreshRankings();
     })
     .catch(function(){});
 }
@@ -2715,6 +3169,9 @@ if (cqResultsEl && cqQuestionsEl){
     if (!title){ msg.textContent = "要填測驗標題先開到。"; return; }
     var delPw = document.getElementById("cq-password").value;
     if (!delPw || delPw.length < 4){ msg.textContent = "刪除密碼最少要有 4 個字元，設定好之後先刪得返呢份測驗。"; return; }
+    var isPriv = cqVis === "private";
+    var accessPw = isPriv ? document.getElementById("cq-access").value : "";
+    if (isPriv && accessPw.length < 4){ msg.textContent = "私人測驗要設定入場密碼，最少 4 個字元，冇密碼就冇人入到嚟玩。"; return; }
     var ok = true;
     var hasUnassigned = false;
     var results = [];
@@ -2748,19 +3205,28 @@ if (cqResultsEl && cqQuestionsEl){
     if (hasUnassigned){ msg.textContent = "有選項未揀結果（原本指向嘅結果可能刪咗），請重新揀返先開到。"; refreshCreator(); return; }
     if (!questions.length || !ok){ msg.textContent = "每條問題同每個選項都要填好先開到。"; return; }
     var id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-    var quiz = { id: id, title: title, description: desc, questions: questions, results: results };
+    var quiz = { id: id, title: title, description: desc, questions: questions, results: results, isPrivate: isPriv };
     lastCreatedId = id;
     msg.textContent = "建立緊…";
-    /* 密碼即刻雜湊，明文唔會儲存、唔會傳送；存落去嘅只有 creator_code 雜湊值 */
+    /* 密碼即刻雜湊，明文唔會儲存、唔會傳送；存落去嘅只有 creator_code
+       （刪除密碼）同 access_code（入場密碼）兩個雜湊值，兩者完全分開 */
     hashPassword(delPw).then(function(hash){
       quiz.creatorCode = hash;
       document.getElementById("cq-password").value = "";
-      return saveCustomQuiz(quiz);
+      if (!isPriv) return saveCustomQuiz(quiz);
+      return hashPassword(accessPw).then(function(ah){
+        quiz.accessCode = ah;
+        document.getElementById("cq-access").value = "";
+        unlockedPrivate[id] = true;   /* 開嗰位自己頭先設定密碼，唔使再入；記低落 localStorage */
+        saveBrowserState();
+        return saveCustomQuiz(quiz);
+      });
     }).then(function(synced){
-      msg.textContent = synced
+      msg.textContent = (synced
         ? "開好喇，已經同步到 Supabase，朋友用條路徑就玩得。"
         : (sb ? "開好喇（頭先同步唔到，暫時只留喺今次開頁）。"
-              : "開好喇！本機模式之下，呢份測驗只會留喺今次開頁；接通 Supabase 之後就可以長期保存同共享。");
+              : "開好喇！本機模式之下，呢份測驗只會留喺今次開頁；接通 Supabase 之後就可以長期保存同共享。"))
+        + (isPriv ? "呢份係私人測驗：唔會出現喺主頁清單同排行榜，朋友開條路徑嗰陣要入返入場密碼先玩得，記得將入場密碼另外話俾朋友知。" : "");
       var share = document.getElementById("cq-share");
       share.classList.remove("hidden");
       document.getElementById("cq-path").textContent = "#/play/" + id;
@@ -2794,6 +3260,20 @@ startBtns.forEach(function(btn){
   btn.addEventListener("click", function(){ startQuiz(btn.getAttribute("data-start")); });
 });
 document.getElementById("btn-quit").addEventListener("click", function(){ show("home"); });
+document.getElementById("btn-gate-home").addEventListener("click", function(){ gateQuiz = null; show("home"); });
+document.getElementById("gate-go").addEventListener("click", tryGate);
+document.getElementById("gate-pw").addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); tryGate(); } });
+document.querySelectorAll("#cq-vis-chips .cq-chip").forEach(function(chip){
+  chip.addEventListener("click", function(){
+    cqVis = chip.getAttribute("data-vis") === "private" ? "private" : "public";
+    document.querySelectorAll("#cq-vis-chips .cq-chip").forEach(function(c){
+      var on = c === chip;
+      c.classList.toggle("selected", on);
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    document.getElementById("cq-access-field").classList.toggle("hidden", cqVis !== "private");
+  });
+});
 document.getElementById("btn-del-quiz").addEventListener("click", function(){
   if (mode !== "custom" || !customQuiz) return;
   var box = document.getElementById("quiz-del-box");
@@ -2846,6 +3326,7 @@ document.getElementById("btn-copy").addEventListener("click", function(){
 renderArchive("food");
 renderCustomList();
 fetchCustomQuizzes();
+refreshRankings();
 checkHash();
 })();
 </script>
